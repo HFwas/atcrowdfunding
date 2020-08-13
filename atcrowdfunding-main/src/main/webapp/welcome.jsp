@@ -8,5 +8,6 @@
 </head>
 <body>
 	欢迎
+	<jsp:forward page="/index"></jsp:forward>
 </body>
 </html>
