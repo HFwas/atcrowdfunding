@@ -15,8 +15,8 @@
 	
 		<!-- mvn mybatis-generator:generate 配置数据库位置 ，配置虚拟机上的mysql ip地址；不采用安全协议连接，否则无法逆向生成 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.137.3:3306/atcrowdfunding190401?useSSL=false"
-			userId="root" password="1230">
+			connectionURL="jdbc:mysql://192.168.43.128:3306/atcrowdfunding190401?useSSL=false"
+			userId="root" password="123456">
 		</jdbcConnection>
 
 		
