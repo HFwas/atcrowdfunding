@@ -8,9 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="static/css/font-awesome.min.css">
-	<link rel="stylesheet" href="static/css/carousel.css">
+	
+	<!-- 前台路径，由浏览器发起请求路径 -->
+	<%@ include file="/WEB-INF/jsp/common/css.jsp" %><!-- 静态包含 -->
+	<%-- <jsp:include page="/WEB-INF/jsp/common/css.jsp"></jsp:include> --%> <!-- 动态包含 -->
 	<style>
     h3 {
         font-weight:bold;
@@ -130,13 +131,13 @@ h3.break>a {
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active" onclick="window.location.href='project.html'" style="cursor:pointer;">
-          <img src="img/carousel-1.jpg" alt="First slide">
+          <img src="${PATH}/static/img/carousel-1.jpg" alt="First slide">
         </div>
         <div class="item" onclick="window.location.href='project.html'" style="cursor:pointer;">
-          <img src="img/carousel-2.jpg" alt="Second slide">
+          <img src="${PATH}/static/img/carousel-2.jpg" alt="Second slide">
         </div>
         <div class="item" onclick="window.location.href='project.html'" style="cursor:pointer;">
-          <img src="img/carousel-3.jpg" alt="Third slide">
+          <img src="${PATH}/static/img/carousel-3.jpg" alt="Third slide">
         </div>
       </div>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -159,19 +160,19 @@ h3.break>a {
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img class="img-circle" src="img/p1.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <img class="img-circle" src="${PATH}/static/img/p1.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
           <h2>智能高清监控机器人</h2>
           <p>可爱的造型，摄像安防远程互联的全能设计，让你随时随地守护您的家人，陪伴你的生活。</p>
           <p><a class="btn btn-default" href="project.html" role="button">项目详情 &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="img/p2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <img class="img-circle" src="${PATH}/static/img/p2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
           <h2>NEOKA智能手环</h2>
           <p>要运动更要安全，这款、名为“蝶舞”的NEOKA-V9100智能运动手环为“安全运动而生”。</p>
           <p><a class="btn btn-default" href="project.html" role="button">项目详情 &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="img/p3.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+          <img class="img-circle" src="${PATH}/static/img/p3.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
           <h2>驱蚊扣</h2>
           <p>随处使用的驱蚊纽扣，<br>解决夏季蚊虫问题。</p>
           <p><a class="btn btn-default" href="project.html" role="button">项目详情 &raquo;</a></p>
@@ -194,7 +195,7 @@ h3.break>a {
 			<div class="row">
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-1.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-1.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">活性富氢净水直饮机</a>
@@ -215,7 +216,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-2.gif" />
+						<img alt="300x200" src="${PATH}/static/img/product-2.gif" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">酷驰触控龙头，智享厨房黑科技</a>
@@ -236,7 +237,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-3.png" />
+						<img alt="300x200" src="${PATH}/static/img/product-3.png" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">小熊猫鱼眼全景安防摄像机</a>
@@ -257,7 +258,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-4.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-4.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">一款精致的机械表</a>
@@ -300,7 +301,7 @@ h3.break>a {
 			<div class="row">
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-5.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-5.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">活性富氢净水直饮机</a>
@@ -321,7 +322,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-6.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-6.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">酷驰触控龙头，智享厨房黑科技</a>
@@ -342,7 +343,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-7.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-7.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">小熊猫鱼眼全景安防摄像机</a>
@@ -363,7 +364,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-8.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-8.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">一款精致的机械表</a>
@@ -406,7 +407,7 @@ h3.break>a {
 			<div class="row">
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-9.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-9.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">活性富氢净水直饮机</a>
@@ -427,7 +428,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-2.gif" />
+						<img alt="300x200" src="${PATH}/static/img/product-2.gif" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">酷驰触控龙头，智享厨房黑科技</a>
@@ -448,7 +449,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-3.png" />
+						<img alt="300x200" src="${PATH}/static/img/product-3.png" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">小熊猫鱼眼全景安防摄像机</a>
@@ -469,7 +470,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-4.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-4.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">一款精致的机械表</a>
@@ -512,7 +513,7 @@ h3.break>a {
 			<div class="row">
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-1.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-1.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">活性富氢净水直饮机</a>
@@ -533,7 +534,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-2.gif" />
+						<img alt="300x200" src="${PATH}/static/img/product-2.gif" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">酷驰触控龙头，智享厨房黑科技</a>
@@ -554,7 +555,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-3.png" />
+						<img alt="300x200" src="${PATH}/static/img/product-3.png" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">小熊猫鱼眼全景安防摄像机</a>
@@ -575,7 +576,7 @@ h3.break>a {
 				</div>
 				<div class="col-md-3">
 					<div class="thumbnail">
-						<img alt="300x200" src="img/product-4.jpg" />
+						<img alt="300x200" src="${PATH}/static/img/product-4.jpg" />
 						<div class="caption">
 							<h3 class="break">
 								<a href="project.html">一款精致的机械表</a>
@@ -602,30 +603,13 @@ h3.break>a {
 	</div>
 </div> 
       
-      <!-- FOOTER -->
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-			<div id="footer">
-				<div class="footerNav">
-					 <a rel="nofollow" href="http://www.atguigu.com">关于我们</a> | <a rel="nofollow" href="http://www.atguigu.com">服务条款</a> | <a rel="nofollow" href="http://www.atguigu.com">免责声明</a> | <a rel="nofollow" href="http://www.atguigu.com">网站地图</a> | <a rel="nofollow" href="http://www.atguigu.com">联系我们</a>
-				</div>
-				<div class="copyRight">
-					Copyright ?2017-2017atguigu.com 版权所有
-				</div>
-			</div>
-			
-		</div>
-	</div>
-</div>
+	<%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 
     </div><!-- /.container -->
 
 
-    <script src="static/jquery/jquery-2.1.1.min.js"></script>
-    <script src="static/bootstrap/js/bootstrap.min.js"></script>
-	<script src="static/script/docs.min.js"></script>
-    <script src="static/script/back-to-top.js"></script>
+    <%@ include file="/WEB-INF/jsp/common/js.jsp" %>
+    
     <script>
     $(".thumbnail img").css("cursor", "pointer");
     $(".thumbnail img").click(function(){
