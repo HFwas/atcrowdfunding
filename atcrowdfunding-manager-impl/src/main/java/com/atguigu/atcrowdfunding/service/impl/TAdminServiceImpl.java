@@ -14,6 +14,7 @@ import com.atguigu.atcrowdfunding.mapper.TAdminMapper;
 import com.atguigu.atcrowdfunding.service.TAdminService;
 import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.MD5Util;
+import com.github.pagehelper.PageInfo;
 
 @Service
 public class TAdminServiceImpl implements TAdminService {
@@ -48,5 +49,13 @@ public class TAdminServiceImpl implements TAdminService {
 		}else {
 			throw new LoginException(Const.LOGIN_LOGINACCT_ERROR);
 		}
+	}
+
+	@Override
+	public PageInfo<TAdmin> listAdminPage(Map<String, Object> paramMap) {
+
+		adminMapper.selectByExample(null);
+		
+		return null;
 	}
 }
