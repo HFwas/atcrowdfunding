@@ -11,5 +11,11 @@ public interface TAdminService {
 
 	PageInfo<TAdmin> listAdminPage(Map<String, Object> paramMap);
 
+	void saveTAdmin(TAdmin admin);
+
+	TAdmin getTAdminById(Integer id);
+
+	void updateTAdmin(TAdmin admin);
+
 	
 }

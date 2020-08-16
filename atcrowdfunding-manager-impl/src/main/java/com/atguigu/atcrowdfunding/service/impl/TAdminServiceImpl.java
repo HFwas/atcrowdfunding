@@ -12,6 +12,7 @@ import com.atguigu.atcrowdfunding.bean.TAdminExample;
 import com.atguigu.atcrowdfunding.exception.LoginException;
 import com.atguigu.atcrowdfunding.mapper.TAdminMapper;
 import com.atguigu.atcrowdfunding.service.TAdminService;
+import com.atguigu.atcrowdfunding.util.AppDateUtils;
 import com.atguigu.atcrowdfunding.util.Const;
 import com.atguigu.atcrowdfunding.util.MD5Util;
 import com.github.pagehelper.PageInfo;
@@ -53,9 +54,33 @@ public class TAdminServiceImpl implements TAdminService {
 
 	@Override
 	public PageInfo<TAdmin> listAdminPage(Map<String, Object> paramMap) {
-
-		adminMapper.selectByExample(null);
 		
-		return null;
+		TAdminExample example = new TAdminExample();
+		
+		example.setOrderByClause("createtime desc");
+		
+		List<TAdmin> list = adminMapper.selectByExample(example);
+		
+		PageInfo<TAdmin> page = new PageInfo<>(list,5);
+		
+		return page;
+	}
+
+	@Override
+	public void saveTAdmin(TAdmin admin) {
+		admin.setUserpswd(MD5Util.digest(Const.DEFAULT_USERPSWD));
+		admin.setCreatetime(AppDateUtils.getFormatTime());
+		
+		adminMapper.insertSelective(admin);//动态sql，选择性保存
+	}
+
+	@Override
+	public TAdmin getTAdminById(Integer id) {
+		return adminMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void updateTAdmin(TAdmin admin) {
+		adminMapper.updateByPrimaryKeySelective(admin);
 	}
 }

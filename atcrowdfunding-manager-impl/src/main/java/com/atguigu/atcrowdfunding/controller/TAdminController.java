@@ -20,9 +20,41 @@ public class TAdminController {
 	@Autowired
 	TAdminService adminService;
 	
+	@RequestMapping("/admin/doUpdate")
+	public String doUpdate(TAdmin admin) {
+		
+		adminService.updateTAdmin(admin);
+		
+		return "redirect:/admin/index";
+	}
+	
+	
+	@RequestMapping("/admin/toUpdate")
+	public String toUpdate(Integer id, Model model) {
+		
+		TAdmin admin = adminService.getTAdminById(id);
+		model.addAttribute("admin",admin);
+		
+		return "admin/update";
+	}
+	
+	@RequestMapping("/admin/doAdd")
+	public String doAdd(TAdmin admin) {
+		
+		adminService.saveTAdmin(admin);
+		return "redirect:/admin/index";
+	}
+	
+	
+	@RequestMapping("/admin/toAdd")
+	public String toAdd() {
+		
+		return "admin/add";
+	}
+	
 	@RequestMapping("/admin/index")
-	public String index(@RequestParam(value="pageNume",required =false,defaultValue="1") Integer pageNum,
-			@RequestParam(value="pageSize",required =false,defaultValue="1")Integer pageSize,
+	public String index(@RequestParam(value="pageNum",required =false,defaultValue="1") Integer pageNum,
+			@RequestParam(value="pageSize",required =false,defaultValue="10")Integer pageSize,
 			Model model) {
 		
 		PageHelper.startPage(pageNum, pageSize);
