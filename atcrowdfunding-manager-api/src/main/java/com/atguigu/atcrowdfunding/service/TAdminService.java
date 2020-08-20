@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.atguigu.atcrowdfunding.bean.TAdmin;
@@ -18,6 +19,8 @@ public interface TAdminService{
 	void updateTAdmin(TAdmin admin);
 
 	void deleteTAdmin(Integer id);
+
+	void deleteBatch(List<Integer> idList);
 
 	
 }

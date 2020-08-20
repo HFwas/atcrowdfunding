@@ -61,7 +61,7 @@ public class TAdminServiceImpl implements TAdminService {
 		
 		if (!"".equals(condition)) {
 			example.createCriteria().andLoginacctLike("%"+condition+"%");
-			
+			 
 			Criteria criteria2 = example.createCriteria();
 			criteria2.andUsernameLike("%"+condition+"%");
 			
@@ -103,5 +103,10 @@ public class TAdminServiceImpl implements TAdminService {
 	@Override
 	public void deleteTAdmin(Integer id) {
 		adminMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public void deleteBatch(List<Integer> idList) {
+		adminMapper.deleteBash(idList);
 	}
 }

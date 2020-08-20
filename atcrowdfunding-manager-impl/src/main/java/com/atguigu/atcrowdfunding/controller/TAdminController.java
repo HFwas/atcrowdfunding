@@ -1,6 +1,8 @@
 package com.atguigu.atcrowdfunding.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -24,8 +26,24 @@ public class TAdminController {
 	
 	Logger log = LoggerFactory.getLogger(TAdminController.class);
 	
+	@RequestMapping("/admin/doDeleteBatch")
+	public String doDelete(String ids, Integer pageNum) {
+		List<Integer> idList = new ArrayList<Integer>();
+		
+		String[] split = ids.split(",");
+		
+		for (String isStr : split) {
+			int id = Integer.parseInt(isStr);
+			idList.add(id);
+		}
+		
+		adminService.deleteBatch(idList);
+		
+		return "redirect:/admin/index?pageNum="+pageNum;
+	}
+	
 	@RequestMapping("/admin/doDelete")
-	public String doUpdate(Integer id, Integer pageNum) {
+	public String doDelete(Integer id, Integer pageNum) {
 		
 		adminService.deleteTAdmin(id);
 		
