@@ -67,6 +67,14 @@
 	
 	<script>
 		function dologin() {
+			var loginacct = $("#loginacct").val();
+
+			if($.trim("loginacct")==""){
+
+				layer.msg("用户名称不能为空",{time:2000,icon:5});
+				return false;
+			}
+			
 			$("#loginForm").submit();
 		}
 	</script>

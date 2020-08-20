@@ -20,8 +20,8 @@
 
   <body>
 
-	<jsp:include page="/WEB-INF/jsp/common/top.jsp"></jsp:include>
-	
+    <jsp:include page="/WEB-INF/jsp/common/top.jsp"></jsp:include>
+
     <div class="container-fluid">
       <div class="row">
         <jsp:include page="/WEB-INF/jsp/common/sidebar.jsp"></jsp:include>
@@ -34,20 +34,21 @@
 			<div class="panel panel-default">
               <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
 			  <div class="panel-body">
-				<form id="updateForm" action="${PATH}/admin/doUpdate" method="post" >
+				<form id="updateForm" action="${PATH}/admin/doUpdate" method="post">
 				  <div class="form-group">
 					<label for="exampleInputPassword1">登陆账号</label>
 					
-					<input type="hidden" name="id" vlaue="${admin.id }">
-					<input type="text" class="form-control" id="loginacct" name="loginacct" value="${admin.loginacct}" placeholder="请输入登陆账号">
+					<input type="hidden" name="pageNum" value="${param.pageNum}">
+					<input type="hidden" name="id" value="${admin.id }">
+					<input type="text" class="form-control" id="loginacct" name="loginacct" value="${admin.loginacct }" placeholder="请输入登陆账号">
 				  </div>
 				  <div class="form-group">
 					<label for="exampleInputPassword1">用户名称</label>
-					<input type="text" class="form-control" id="username" name="username" value="${admin.username}" placeholder="请输入用户名称">
+					<input type="text" class="form-control" id="username" name="username" value="${admin.username }" placeholder="请输入用户名称">
 				  </div>
 				  <div class="form-group">
 					<label for="exampleInputEmail1">邮箱地址</label>
-					<input type="email" class="form-control" id="email" name="email" value="${admin.email}" placeholder="请输入邮箱地址">
+					<input type="email" class="form-control" id="email" name="email" value="${admin.email }" placeholder="请输入邮箱地址">
 					<p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
 				  </div>
 				  <button id="updateBtn" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 修改</button>
@@ -60,25 +61,29 @@
     </div>
 	
     <%@ include file="/WEB-INF/jsp/common/js.jsp" %>
-        
-     <script type="text/javascript">
-         $(function () {
-		    $(".list-group-item").click(function(){
-			    if ( $(this).find("ul") ) {
-					$(this).toggleClass("tree-closed");
-					if ( $(this).hasClass("tree-closed") ) {
-						$("ul", this).hide("fast");
-					} else {
-						$("ul", this).show("fast");
+        <script type="text/javascript">
+            $(function () {
+			    $(".list-group-item").click(function(){
+				    if ( $(this).find("ul") ) {
+						$(this).toggleClass("tree-closed");
+						if ( $(this).hasClass("tree-closed") ) {
+							$("ul", this).hide("fast");
+						} else {
+							$("ul", this).show("fast");
+						}
 					}
-				}
-			});
-         });
-
-         $("#updateBtn").click(function(){
-			$("#updateForm").submit();
-         })
-     </script>
+				});
+            });
+            
+            
+            
+            $("#updateBtn").click(function(){
+            	$("#updateForm").submit();
+            });
+            
+            
+            
+        </script>
   </body>
 </html>
     

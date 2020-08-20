@@ -3,6 +3,8 @@ package com.atguigu.atcrowdfunding.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +22,22 @@ public class TAdminController {
 	@Autowired
 	TAdminService adminService;
 	
+	Logger log = LoggerFactory.getLogger(TAdminController.class);
+	
+	@RequestMapping("/admin/doDelete")
+	public String doUpdate(Integer id, Integer pageNum) {
+		
+		adminService.deleteTAdmin(id);
+		
+		return "redirect:/admin/index?pageNum="+pageNum;
+	}
+	
 	@RequestMapping("/admin/doUpdate")
-	public String doUpdate(TAdmin admin) {
+	public String doUpdate(TAdmin admin, Integer pageNum) {
 		
 		adminService.updateTAdmin(admin);
 		
-		return "redirect:/admin/index";
+		return "redirect:/admin/index?pageNum="+pageNum;
 	}
 	
 	
@@ -42,7 +54,8 @@ public class TAdminController {
 	public String doAdd(TAdmin admin) {
 		
 		adminService.saveTAdmin(admin);
-		return "redirect:/admin/index";
+		//return "redirect:/admin/index";
+		return "redirect:/admin/index?pageNum="+Integer.MAX_VALUE;
 	}
 	
 	
@@ -55,11 +68,18 @@ public class TAdminController {
 	@RequestMapping("/admin/index")
 	public String index(@RequestParam(value="pageNum",required =false,defaultValue="1") Integer pageNum,
 			@RequestParam(value="pageSize",required =false,defaultValue="10")Integer pageSize,
-			Model model) {
+			Model model,
+			@RequestParam(value="condition",required=false,defaultValue="") String condition) {
 		
-		PageHelper.startPage(pageNum, pageSize);
+		log.debug("pageNum={}",pageNum);
+		log.debug("pageSize={}",pageSize);
+		log.debug("condition={}",condition);
+		
+		
+		PageHelper.startPage(pageNum, pageSize);//线程绑定
 		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("condition", condition);
 		
 		PageInfo<TAdmin> page = adminService.listAdminPage(paramMap);
 		

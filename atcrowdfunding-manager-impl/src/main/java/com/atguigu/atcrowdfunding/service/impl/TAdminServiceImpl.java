@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.atguigu.atcrowdfunding.bean.TAdmin;
 import com.atguigu.atcrowdfunding.bean.TAdminExample;
+import com.atguigu.atcrowdfunding.bean.TAdminExample.Criteria;
 import com.atguigu.atcrowdfunding.exception.LoginException;
 import com.atguigu.atcrowdfunding.mapper.TAdminMapper;
 import com.atguigu.atcrowdfunding.service.TAdminService;
@@ -55,7 +56,22 @@ public class TAdminServiceImpl implements TAdminService {
 	@Override
 	public PageInfo<TAdmin> listAdminPage(Map<String, Object> paramMap) {
 		
+		String condition = (String)paramMap.get("condition");
 		TAdminExample example = new TAdminExample();
+		
+		if (!"".equals(condition)) {
+			example.createCriteria().andLoginacctLike("%"+condition+"%");
+			
+			Criteria criteria2 = example.createCriteria();
+			criteria2.andUsernameLike("%"+condition+"%");
+			
+			Criteria criteria3 = example.createCriteria();
+			criteria3.andEmailLike("%"+condition+"%");
+			
+			example.or(criteria2);
+			example.or(criteria3);
+			
+		}
 		
 		example.setOrderByClause("createtime desc");
 		
@@ -82,5 +98,10 @@ public class TAdminServiceImpl implements TAdminService {
 	@Override
 	public void updateTAdmin(TAdmin admin) {
 		adminMapper.updateByPrimaryKeySelective(admin);
+	}
+
+	@Override
+	public void deleteTAdmin(Integer id) {
+		adminMapper.deleteByPrimaryKey(id);
 	}
 }

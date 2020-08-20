@@ -5,7 +5,7 @@ import java.util.Map;
 import com.atguigu.atcrowdfunding.bean.TAdmin;
 import com.github.pagehelper.PageInfo;
 
-public interface TAdminService {
+public interface TAdminService{
 
 	TAdmin getTAdminByLogin(Map<String, Object> paramMap);
 
@@ -16,6 +16,8 @@ public interface TAdminService {
 	TAdmin getTAdminById(Integer id);
 
 	void updateTAdmin(TAdmin admin);
+
+	void deleteTAdmin(Integer id);
 
 	
 }

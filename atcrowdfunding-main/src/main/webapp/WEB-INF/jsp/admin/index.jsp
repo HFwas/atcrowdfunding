@@ -153,6 +153,9 @@
             });
             
             
+            
+            
+            
             $("#selectAll").click(function(){
             	
             	//$("tbody input[type='checkbox']").attr("checked",this.checked);  //主要出现自定义属性
@@ -185,6 +188,7 @@
             	
             	console.log(ids);
             	
+            	
 				layer.confirm('您是否确定删除该些数据?',{btn:['确定','取消']},function(index){
             		
 					window.location.href="${PATH}/admin/doDeleteBatch?pageNum=${page.pageNum}&ids="+ids;
@@ -196,6 +200,13 @@
             	
             	
             });
+            
+            
+            
+            
+            
+            
+            
             
         </script>
   </body>
