@@ -37,13 +37,13 @@
   <div class="form-group has-feedback">
     <div class="input-group">
       <div class="input-group-addon">查询条件</div>
-      <input id="condition" class="form-control has-success" type="text" placeholder="请输入查询条件">
+      <input class="form-control has-success" type="text" placeholder="请输入查询条件">
     </div>
   </div>
-  <button id="queryBtn" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+  <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
 </form>
 <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-<button id="addBtn" type="button" class="btn btn-primary" style="float:right;"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+<button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
 <br>
  <hr style="clear:both;">
           <div class="table-responsive">
@@ -74,29 +74,6 @@
         </div>
       </div>
     </div>
-    
-    
-    <!-- 添加数据 模态框 -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加角色</h4>
-      </div>
-      <div class="modal-body">
-		  <div class="form-group">
-			<label for="exampleInputPassword1">角色名称</label>
-			<input type="text" class="form-control" id="name" name="name" placeholder="请输入角色名称">
-		  </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button id="saveBtn" type="button" class="btn btn-primary">保存</button>
-      </div>
-    </div>
-  </div>
-</div>
 
     <%@ include file="/WEB-INF/jsp/common/js.jsp" %>
     
@@ -114,12 +91,6 @@
 				});
 				initData(1);
             });
-
-          //======分页查询 开始================================================================
-            var json = {
-        			pageNum:1,
-        			pageSize:2
-        		};
             
             function initData(pageNum){
 				//1.发起ajax请求，获取分页数据
@@ -207,52 +178,7 @@
 				
         	}
 
-
-        	$("#queryBtn").click(function(){
-				var condition = $("#condition").val();
-        		
-        		json.condition = condition;
-        		
-        		initData(1);
-            })
-
-            //===添加 开始==============================================================
-        		
-        	$("#addBtn").click(function(){
-        		$("#addModal").modal({
-        			show:true,
-        			backdrop:'static',
-        			keyboard:false
-        		});
-        	});
-
-        	$("#saveBtn").click(function(){
-        		var name = $("#addModal input[name='name']").val();
-        		
-        		$.ajax({
-        			type:"post",
-        			url:"${PATH}/role/doAdd",
-        			data:{
-        				name:name
-        			},
-        			beforeSend:function(){
-        				return true ;
-        			},
-        			success:function(result){
-        				if("ok"==result){
-        					layer.msg("保存成功",{time:1000},function(){
-        						$("#addModal").modal('hide');
-        						$("#addModal input[name='name']").val("");
-        						initData(1); //添加后初始化第一页，倒序排序。
-        					});
-        				}else{
-        					layer.msg("保存失败");
-        				}
-        			}
-        		});
-        		
-        	});
-        	
+            
         </script>
   </body>
 </html>
