@@ -25,6 +25,26 @@ public class TRoleController {
 	Logger log = LoggerFactory.getLogger(TRoleController.class);
 	
 	@ResponseBody
+	@RequestMapping("/role/doDelete")
+	public String doDelete(Integer id) {
+		roleService.deleteTRole(id);
+		return "ok";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/doUpdate")
+	public String doUpdate(TRole role) {
+		roleService.updateTRole(role);
+		return "ok";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/getRoleById")
+	public TRole getRoleById(Integer id) {
+		return roleService.getRoleById(id);
+	}
+	
+	@ResponseBody
 	@RequestMapping("/role/doAdd")
 	public String doAdd(TRole role) {
 		
