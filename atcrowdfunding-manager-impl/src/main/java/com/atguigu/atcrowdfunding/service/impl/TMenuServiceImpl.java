@@ -46,4 +46,29 @@ public class TMenuServiceImpl implements TMenuService {
 		
 		return menuList;
 	}
+
+	@Override
+	public List<TMenu> listMenuAllTree() {
+		return menuMapper.selectByExample(null);
+	}
+
+	@Override
+	public void saveTMenu(TMenu menu) {
+		menuMapper.insertSelective(menu);
+	}
+
+	@Override
+	public TMenu getMenuById(Integer id) {
+		return menuMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void updateTMenu(TMenu menu) {
+		menuMapper.updateByPrimaryKeySelective(menu);
+	}
+
+	@Override
+	public void deleteTMenu(Integer id) {
+		menuMapper.deleteByPrimaryKey(id);
+	}
 }
