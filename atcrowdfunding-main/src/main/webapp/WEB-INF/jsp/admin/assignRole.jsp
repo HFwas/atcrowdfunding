@@ -38,7 +38,7 @@
 				<form role="form" class="form-inline">
 				  <div class="form-group">
 					<label for="exampleInputPassword1">未分配角色列表</label><br>
-					<select class="form-control" multiple size="10" style="width:250px;overflow-y:auto;">
+					<select id="leftRoleList" class="form-control" multiple size="10" style="width:250px;overflow-y:auto;">
                         <c:forEach items="${unAssignList}" var="role">
 	                        <option value="${role.id}">${role.name}</option>
                         </c:forEach>
@@ -46,14 +46,14 @@
 				  </div>
 				  <div class="form-group">
                         <ul>
-                            <li class="btn btn-default glyphicon glyphicon-chevron-right"></li>
+                            <li id="leftToRightBtn" class="btn btn-default glyphicon glyphicon-chevron-right"></li>
                             <br>
-                            <li class="btn btn-default glyphicon glyphicon-chevron-left" style="margin-top:20px;"></li>
+                            <li id="rightToLeftBtn" class="btn btn-default glyphicon glyphicon-chevron-left" style="margin-top:20px;"></li>
                         </ul>
 				  </div>
 				  <div class="form-group" style="margin-left:40px;">
 					<label for="exampleInputPassword1">已分配角色列表</label><br>
-					<select class="form-control" multiple size="10" style="width:250px;overflow-y:auto;">
+					<select id="rightRoleList" class="form-control" multiple size="10" style="width:250px;overflow-y:auto;">
                         <c:forEach items="${assignList}" var="role">
 	                        <option value="${role.id}">${role.name}</option>
                         </c:forEach>
@@ -65,32 +65,7 @@
         </div>
       </div>
     </div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			<h4 class="modal-title" id="myModalLabel">帮助</h4>
-		  </div>
-		  <div class="modal-body">
-			<div class="bs-callout bs-callout-info">
-				<h4>测试标题1</h4>
-				<p>测试内容1，测试内容1，测试内容1，测试内容1，测试内容1，测试内容1</p>
-			  </div>
-			<div class="bs-callout bs-callout-info">
-				<h4>测试标题2</h4>
-				<p>测试内容2，测试内容2，测试内容2，测试内容2，测试内容2，测试内容2</p>
-			  </div>
-		  </div>
-		  <!--
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
-		  </div>
-		  -->
-		</div>
-	  </div>
-	</div>
+	
     <%@ include file="/WEB-INF/jsp/common/js.jsp" %>
         <script type="text/javascript">
             $(function () {
@@ -105,6 +80,78 @@
 					}
 				});
             });
+
+			//分配角色
+            ${"#leftToRightBtn"}.click(function(){
+				var leftSelectedRoleList = $("#leftRoleList option:selected");
+             	
+            	if(leftSelectedRoleList.length == 0){
+            		layer.msg("请选择角色再进行分配!",{icon:5,time:2000});
+            		return false ;
+            	}
+            	
+            	var str = '';  //"id=5&id=7&id=8&adminId=1";
+            	
+            	$.each(leftSelectedRoleList,function(i,e){
+            		var roleId = e.value;
+            		str+="roleId="+roleId+"&" ;
+            	});
+            	
+            	str+="adminId=${param.id}";
+
+            	$.ajax({
+            		type:"post",
+            		url:"${PATH}/admin/doAssign",
+            		data:str,
+            		success:function(result){
+            			if("ok"==result){            				
+            				layer.msg("分配成功.",{icon:6,time:1000},function(){
+            					$("#rightRoleList").append(leftSelectedRoleList.clone());
+                            	leftSelectedRoleList.remove();
+            				});
+            			}else{
+            				layer.msg("分配失败.",{icon:5,time:1000});
+            			}
+            		}
+            	});
+            });
+            
+            //取消分配角色
+            ${"#rightToLeftBtn"}.click(function(){
+				var rightSelectedRoleList = $("#rightRoleList option:selected");
+            	
+            	if(rightSelectedRoleList.length == 0){
+            		layer.msg("请选择已分配角色再取消分配!",{icon:5,time:2000});
+            		return false ;
+            	}
+            	
+            	var str = '';  //"id=5&id=7&id=8&adminId=1";
+            	
+            	$.each(rightSelectedRoleList,function(i,e){
+            		var roleId = e.value;
+            		str+="roleId="+roleId+"&" ;
+            	});
+            	
+            	str+="adminId=${param.id}";
+
+            	$.ajax({
+            		type:"post",
+            		url:"${PATH}/admin/doUnAssign",
+            		data:str,
+            		success:function(result){
+            			if("ok"==result){            				
+            				layer.msg("取消分配成功.",{icon:6,time:1000},function(){
+            					$("#leftRoleList").append(rightSelectedRoleList.clone());
+            	            	rightSelectedRoleList.remove();
+            				});
+            			}else{
+            				layer.msg("取消分配失败.",{icon:5,time:1000});
+            			}
+            		}
+            	});
+            });
+            
+            
         </script>
   </body>
 </html>

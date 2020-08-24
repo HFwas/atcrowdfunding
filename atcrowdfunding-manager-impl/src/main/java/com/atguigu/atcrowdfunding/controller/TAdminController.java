@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.atcrowdfunding.bean.TAdmin;
 import com.atguigu.atcrowdfunding.bean.TRole;
@@ -30,6 +31,32 @@ public class TAdminController {
 	TRoleService roleService;
 	
 	Logger log = LoggerFactory.getLogger(TAdminController.class);
+	
+	@ResponseBody
+	@RequestMapping("/admin/doUnAssign")
+	public String doUnAssign(Integer[] roleId, Integer adminId) {
+		log.debug("adminId={}",adminId);
+		for (Integer rId : roleId) {
+			log.debug("roleId={}",rId);
+		}
+		
+		roleService.deleteAdminAndRoleRealationship(roleId,adminId);
+		
+		return "ok";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/admin/doAssign")
+	public String doAssign(Integer[] roleId, Integer adminId) {
+		log.debug("adminId={}",adminId);
+		for (Integer rId : roleId) {
+			log.debug("roleId={}",rId);
+		}
+		
+		roleService.saveAdminAndRoleRealationship(roleId,adminId);
+		
+		return "ok";
+	}
 	
 	@RequestMapping("/admin/toAssign")
 	public String toAssign(String id, Model model) {

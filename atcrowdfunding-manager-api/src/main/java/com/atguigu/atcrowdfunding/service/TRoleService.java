@@ -22,4 +22,12 @@ public interface TRoleService {
 
 	List<Integer> getRoleIdByAdminId(String id);
 
+	void saveAdminAndRoleRealationship(Integer[] roleId, Integer adminId);
+
+	void deleteAdminAndRoleRealationship(Integer[] roleId, Integer adminId);
+
+	void saveRoleAndPermissionRelationship(Integer roleId, List<Integer> ids);
+
+	List<Integer> listPermissionIdByRoleId(Integer roleId);
+
 }

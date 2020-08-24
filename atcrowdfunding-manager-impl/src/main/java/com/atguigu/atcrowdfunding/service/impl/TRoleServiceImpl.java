@@ -10,8 +10,11 @@ import org.springframework.util.StringUtils;
 import com.atguigu.atcrowdfunding.bean.TRole;
 import com.atguigu.atcrowdfunding.bean.TRoleExample;
 import com.atguigu.atcrowdfunding.bean.TRoleExample.Criteria;
+import com.atguigu.atcrowdfunding.bean.TRolePermissionExample;
 import com.atguigu.atcrowdfunding.mapper.TAdminRoleMapper;
+import com.atguigu.atcrowdfunding.mapper.TPermissionMapper;
 import com.atguigu.atcrowdfunding.mapper.TRoleMapper;
+import com.atguigu.atcrowdfunding.mapper.TRolePermissionMapper;
 import com.atguigu.atcrowdfunding.service.TRoleService;
 import com.github.pagehelper.PageInfo;
 
@@ -23,7 +26,10 @@ public class TRoleServiceImpl implements TRoleService {
 	
 	@Autowired
 	TAdminRoleMapper adminRoleMapper;
-
+	
+	@Autowired
+	TRolePermissionMapper rolePermissionMapper;
+	
 	@Override
 	public PageInfo<TRole> listRolePage(Map<String, Object> paramMap) {
 		
@@ -74,5 +80,30 @@ public class TRoleServiceImpl implements TRoleService {
 	@Override
 	public List<Integer> getRoleIdByAdminId(String id) {
 		return adminRoleMapper.getRoleIdByAdminId(id);
+	}
+
+	@Override
+	public void saveAdminAndRoleRealationship(Integer[] roleId, Integer adminId) {
+		adminRoleMapper.saveAdminAndRoleRealationship(roleId,adminId);
+	}
+
+	@Override
+	public void deleteAdminAndRoleRealationship(Integer[] roleId, Integer adminId) {
+		adminRoleMapper.deleteAdminAndRoleRealationship(roleId,adminId);
+	}
+
+	@Override
+	public void saveRoleAndPermissionRelationship(Integer roleId, List<Integer> ids) {
+		//先删除之前分配过的，然后再重新分配所有打钩的
+		TRolePermissionExample example = new TRolePermissionExample();
+		example.createCriteria().andRoleidEqualTo(roleId);
+		rolePermissionMapper.deleteByExample(example);
+		
+		rolePermissionMapper.saveRoleAndPermissionRelationship(roleId,ids);
+	}
+
+	@Override
+	public List<Integer> listPermissionIdByRoleId(Integer roleId) {
+		return rolePermissionMapper.listPermissionIdByRoleId(roleId);
 	}
 }

@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.atcrowdfunding.bean.TRole;
 import com.atguigu.atcrowdfunding.service.TRoleService;
+import com.atguigu.atcrowdfunding.util.Datas;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -23,6 +25,27 @@ public class TRoleController {
 	TRoleService roleService;
 	
 	Logger log = LoggerFactory.getLogger(TRoleController.class);
+	
+	@ResponseBody
+	@RequestMapping("/role/listPermissionIdByRoleId")
+	public List<Integer> listPermissionIdByRoleId(Integer roleId) {
+		log.debug("roleId={}",roleId);
+		
+		List<Integer> list = roleService.listPermissionIdByRoleId(roleId);
+		
+		return list;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/role/doAssignPermissionToRole")
+	public String doAssignPermissionToRole(Integer roleId,Datas ds) {
+		log.debug("roleId={}",roleId);
+		log.debug("permissionIds={}",ds.getIds());
+		
+		roleService.saveRoleAndPermissionRelationship(roleId,ds.getIds());
+		
+		return "ok";
+	}
 	
 	@ResponseBody
 	@RequestMapping("/role/doDelete")
