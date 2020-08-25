@@ -32,6 +32,11 @@
 					<a href="">安全设置</a>
 				</dd>
 			</dl></li>
-		<li class="layui-nav-item"><a href="">退出</a></li>
+		<li class="layui-nav-item">
+			<form id="logout" action="${PATH}/logout" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				<a onclick="$('#logout').submit()">退出</a>
+			</form>
+		</li>
 	</ul>
 </div>

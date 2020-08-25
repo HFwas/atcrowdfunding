@@ -11,6 +11,9 @@ public class AdminController {
 		return "main";
 	}
 	
-	
+	@GetMapping("/unauth.html")
+	public String unauth(){
+		return "unauth";
+	}
 
 }
