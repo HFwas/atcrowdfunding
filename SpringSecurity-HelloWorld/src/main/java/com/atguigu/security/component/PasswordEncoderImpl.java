@@ -15,5 +15,5 @@ public class PasswordEncoderImpl implements PasswordEncoder {
 	public boolean matches(CharSequence rawPassword, String encodedPassword) {
 		return encodedPassword.equals(MD5Util.digest(rawPassword.toString()));
 	}
-
+	
 }
