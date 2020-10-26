@@ -59,8 +59,7 @@
 					<a href="reg.html">我要注册</a>
 				</label>
 			</div>
-			<a class="btn btn-lg btn-success btn-block" onclick="dologin()">
-				登录</a>
+			<a class="btn btn-lg btn-success btn-block" onclick="dologin()">登录</a>
 		</form>
 	</div>
 	
